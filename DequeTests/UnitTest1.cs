@@ -18,6 +18,7 @@ namespace DequeTests
             //assert
             Assert.AreSame(dq.head, dq.tail);
             Assert.IsNotNull(dq.head);
+            Assert.AreEqual(dq.head.data, "abcd");
         }
 
         [TestMethod]
@@ -32,6 +33,7 @@ namespace DequeTests
             //assert
             Assert.AreSame(dq.head, dq.tail);
             Assert.IsNotNull(dq.head);
+            Assert.AreEqual(dq.head.data, "abcd");
         }
 
         [TestMethod]
