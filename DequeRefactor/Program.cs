@@ -117,6 +117,7 @@ namespace DequeRefactor
 
         public bool Mutex_available()
         {
+            // for testing
             bool acq = mut.WaitOne(1);
             if (acq)
                 mut.ReleaseMutex();
