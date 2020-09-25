@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("DequeTests")]
@@ -26,6 +27,7 @@ namespace DequeRefactor
         // Double-ended Queue (Deque)
         internal DLLNode? head;
         internal DLLNode? tail;
+        private static Mutex mut = new Mutex();
 
         public Deque()
         {
@@ -35,12 +37,15 @@ namespace DequeRefactor
 
         public void Init_from_empty(object o)
         {
+            mut.WaitOne();
             head = new DLLNode(o);
             tail = head;
+            mut.ReleaseMutex();
         }
 
         public void Push(object o)
         {
+            mut.WaitOne();
             if (tail == null)
                 Init_from_empty(o);
             else
@@ -50,10 +55,12 @@ namespace DequeRefactor
                 new_tail.prev = tail;
                 tail = new_tail;
             }
+            mut.ReleaseMutex();
         }
 
         public void Push_front(object o)
         {
+            mut.WaitOne();
             if (head == null)
                 Init_from_empty(o);
             else
@@ -63,12 +70,17 @@ namespace DequeRefactor
                 head.prev = new_head;
                 head = new_head;
             }
+            mut.ReleaseMutex();
         }
 
         public object? Pop()
         {
+            mut.WaitOne();
             if (head == null)
+            {
+                mut.ReleaseMutex();
                 return null;
+            }
             else
             {
                 DLLNode popped = head;
@@ -77,14 +89,19 @@ namespace DequeRefactor
                     head.prev = null;
                 else
                     tail = null;
+                mut.ReleaseMutex();
                 return popped.data;
             }
         }
 
         public object? Pop_back()
         {
+            mut.WaitOne();
             if (tail == null)
+            {
+                mut.ReleaseMutex();
                 return null;
+            }
             else
             {
                 DLLNode popped = tail;
@@ -93,6 +110,7 @@ namespace DequeRefactor
                     tail.next = null;
                 else
                     head = null;
+                mut.ReleaseMutex();
                 return popped.data;
             }
         }
