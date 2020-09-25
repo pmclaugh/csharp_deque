@@ -63,6 +63,26 @@ namespace DequeTests
             Assert.AreSame(dq.head, dq.tail);
             Assert.IsNull(dq.head);
         }
+
+        [TestMethod]
+        public void TestPopOnEmpty()
+        {
+            //arrange
+            Deque dq = new Deque();
+
+            //act & assert
+            Assert.AreEqual(null, dq.pop());
+        }
+
+        [TestMethod]
+        public void TestPopBackOnEmpty()
+        {
+            //arrange
+            Deque dq = new Deque();
+
+            //act & assert
+            Assert.AreEqual(null, dq.pop_back());
+        }
     }
 
     [TestClass]
@@ -71,6 +91,7 @@ namespace DequeTests
         [TestMethod]
         public void TestQueueOrder()
         {
+            // queue-like ordering is achieved using push and pop
             Deque dq = new Deque();
             for (int i = 0; i < 10; i++)
                 dq.push(i);
@@ -85,6 +106,7 @@ namespace DequeTests
         [TestMethod]
         public void TestStackOrder()
         {
+            // stack-like ordering is achieved using push_front and pop
             Deque dq = new Deque();
             for (int i = 0; i < 10; i++)
                 dq.push_front(i);
@@ -92,6 +114,36 @@ namespace DequeTests
             for (int i = 9; i >= 0; i--)
             {
                 int j = (int)dq.pop();
+                Assert.AreEqual(i, j);
+            }
+        }
+
+        [TestMethod]
+        public void TestOtherQueueOrder()
+        {
+            // queue-like ordering can also be achieved using push_front and pop_back
+            Deque dq = new Deque();
+            for (int i = 0; i < 10; i++)
+                dq.push_front(i);
+
+            for (int i = 0; i < 10; i++)
+            {
+                int j = (int)dq.pop_back();
+                Assert.AreEqual(i, j);
+            }
+        }
+
+        [TestMethod]
+        public void TestOtherStackOrder()
+        {
+            // stack-like ordering can also be achieved using push and pop_back
+            Deque dq = new Deque();
+            for (int i = 0; i < 10; i++)
+                dq.push(i);
+
+            for (int i = 9; i >= 0; i--)
+            {
+                int j = (int)dq.pop_back();
                 Assert.AreEqual(i, j);
             }
         }
