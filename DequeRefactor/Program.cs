@@ -33,16 +33,16 @@ namespace DequeRefactor
             tail = null;
         }
 
-        public void init_from_empty(object o)
+        public void Init_from_empty(object o)
         {
             head = new DLLNode(o);
             tail = head;
         }
 
-        public void push(object o)
+        public void Push(object o)
         {
             if (tail == null)
-                init_from_empty(o);
+                Init_from_empty(o);
             else
             {
                 DLLNode new_tail = new DLLNode(o);
@@ -52,10 +52,10 @@ namespace DequeRefactor
             }
         }
 
-        public void push_front(object o)
+        public void Push_front(object o)
         {
             if (head == null)
-                init_from_empty(o);
+                Init_from_empty(o);
             else
             {
                 DLLNode new_head = new DLLNode(o);
@@ -65,7 +65,7 @@ namespace DequeRefactor
             }
         }
 
-        public object pop()
+        public object? Pop()
         {
             if (head == null)
                 return null;
@@ -81,7 +81,7 @@ namespace DequeRefactor
             }
         }
 
-        public object pop_back()
+        public object? Pop_back()
         {
             if (tail == null)
                 return null;

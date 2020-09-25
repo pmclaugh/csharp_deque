@@ -13,7 +13,7 @@ namespace DequeTests
             Deque dq = new Deque();
 
             //act
-            dq.push_front("abcd");
+            dq.Push_front("abcd");
 
             //assert
             Assert.AreSame(dq.head, dq.tail);
@@ -27,7 +27,7 @@ namespace DequeTests
             Deque dq = new Deque();
 
             //act
-            dq.push("abcd");
+            dq.Push("abcd");
 
             //assert
             Assert.AreSame(dq.head, dq.tail);
@@ -39,10 +39,10 @@ namespace DequeTests
         {
             //arrange
             Deque dq = new Deque();
-            dq.push("abcd");
+            dq.Push("abcd");
 
             //act
-            dq.pop();
+            dq.Pop();
 
             //assert
             Assert.AreSame(dq.head, dq.tail);
@@ -54,10 +54,10 @@ namespace DequeTests
         {
             //arrange
             Deque dq = new Deque();
-            dq.push("abcd");
+            dq.Push("abcd");
 
             //act
-            dq.pop_back();
+            dq.Pop_back();
 
             //assert
             Assert.AreSame(dq.head, dq.tail);
@@ -71,7 +71,7 @@ namespace DequeTests
             Deque dq = new Deque();
 
             //act & assert
-            Assert.AreEqual(null, dq.pop());
+            Assert.AreEqual(null, dq.Pop());
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace DequeTests
             Deque dq = new Deque();
 
             //act & assert
-            Assert.AreEqual(null, dq.pop_back());
+            Assert.AreEqual(null, dq.Pop_back());
         }
     }
 
@@ -91,14 +91,14 @@ namespace DequeTests
         [TestMethod]
         public void TestQueueOrder()
         {
-            // queue-like ordering is achieved using push and pop
+            // queue-like (FIFO) ordering is achieved using push and pop
             Deque dq = new Deque();
             for (int i = 0; i < 10; i++)
-                dq.push(i);
+                dq.Push(i);
 
             for (int i = 0; i < 10; i++)
             {
-                int j = (int)dq.pop();
+                int j = (int)dq.Pop();
                 Assert.AreEqual(i, j);
             }
         }
@@ -106,14 +106,14 @@ namespace DequeTests
         [TestMethod]
         public void TestStackOrder()
         {
-            // stack-like ordering is achieved using push_front and pop
+            // stack-like (LIFO) ordering is achieved using push_front and pop
             Deque dq = new Deque();
             for (int i = 0; i < 10; i++)
-                dq.push_front(i);
+                dq.Push_front(i);
 
             for (int i = 9; i >= 0; i--)
             {
-                int j = (int)dq.pop();
+                int j = (int)dq.Pop();
                 Assert.AreEqual(i, j);
             }
         }
@@ -121,14 +121,14 @@ namespace DequeTests
         [TestMethod]
         public void TestOtherQueueOrder()
         {
-            // queue-like ordering can also be achieved using push_front and pop_back
+            // queue-like ordering (FIFO) can also be achieved using push_front and pop_back
             Deque dq = new Deque();
             for (int i = 0; i < 10; i++)
-                dq.push_front(i);
+                dq.Push_front(i);
 
             for (int i = 0; i < 10; i++)
             {
-                int j = (int)dq.pop_back();
+                int j = (int)dq.Pop_back();
                 Assert.AreEqual(i, j);
             }
         }
@@ -136,14 +136,14 @@ namespace DequeTests
         [TestMethod]
         public void TestOtherStackOrder()
         {
-            // stack-like ordering can also be achieved using push and pop_back
+            // stack-like ordering (LIFO) can also be achieved using push and pop_back
             Deque dq = new Deque();
             for (int i = 0; i < 10; i++)
-                dq.push(i);
+                dq.Push(i);
 
             for (int i = 9; i >= 0; i--)
             {
-                int j = (int)dq.pop_back();
+                int j = (int)dq.Pop_back();
                 Assert.AreEqual(i, j);
             }
         }
