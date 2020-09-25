@@ -114,6 +114,14 @@ namespace DequeRefactor
                 return popped.data;
             }
         }
+
+        public bool Mutex_available()
+        {
+            bool acq = mut.WaitOne(1);
+            if (acq)
+                mut.ReleaseMutex();
+            return acq;
+        }
     }
     class Program
     {

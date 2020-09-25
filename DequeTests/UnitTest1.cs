@@ -19,6 +19,7 @@ namespace DequeTests
             Assert.AreSame(dq.head, dq.tail);
             Assert.IsNotNull(dq.head);
             Assert.AreEqual(dq.head.data, "abcd");
+            Assert.IsTrue(dq.Mutex_available());
         }
 
         [TestMethod]
@@ -34,6 +35,7 @@ namespace DequeTests
             Assert.AreSame(dq.head, dq.tail);
             Assert.IsNotNull(dq.head);
             Assert.AreEqual(dq.head.data, "abcd");
+            Assert.IsTrue(dq.Mutex_available());
         }
 
         [TestMethod]
@@ -49,6 +51,7 @@ namespace DequeTests
             //assert
             Assert.AreSame(dq.head, dq.tail);
             Assert.IsNull(dq.head);
+            Assert.IsTrue(dq.Mutex_available());
         }
 
         [TestMethod]
@@ -64,6 +67,7 @@ namespace DequeTests
             //assert
             Assert.AreSame(dq.head, dq.tail);
             Assert.IsNull(dq.head);
+            Assert.IsTrue(dq.Mutex_available());
         }
 
         [TestMethod]
@@ -74,6 +78,7 @@ namespace DequeTests
 
             //act & assert
             Assert.AreEqual(null, dq.Pop());
+            Assert.IsTrue(dq.Mutex_available());
         }
 
         [TestMethod]
@@ -84,6 +89,7 @@ namespace DequeTests
 
             //act & assert
             Assert.AreEqual(null, dq.Pop_back());
+            Assert.IsTrue(dq.Mutex_available());
         }
     }
 
