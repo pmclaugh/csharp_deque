@@ -14,22 +14,22 @@ namespace DequeTests
         public void ReleasedAfterPush()
         {
             Deque dq = new Deque();
-            Assert.IsTrue(dq.Mutex_available());
+            Assert.IsTrue(dq.MutexAvailable());
             dq.Push("abc");
-            Assert.IsTrue(dq.Mutex_available());
+            Assert.IsTrue(dq.MutexAvailable());
             dq.Push("def");
-            Assert.IsTrue(dq.Mutex_available());
+            Assert.IsTrue(dq.MutexAvailable());
         }
 
         [TestMethod]
         public void ReleasedAfterPushFront()
         {
             Deque dq = new Deque();
-            Assert.IsTrue(dq.Mutex_available());
-            dq.Push_front("abc");
-            Assert.IsTrue(dq.Mutex_available());
-            dq.Push_front("def");
-            Assert.IsTrue(dq.Mutex_available());
+            Assert.IsTrue(dq.MutexAvailable());
+            dq.PushFront("abc");
+            Assert.IsTrue(dq.MutexAvailable());
+            dq.PushFront("def");
+            Assert.IsTrue(dq.MutexAvailable());
         }
 
         [TestMethod]
@@ -39,9 +39,9 @@ namespace DequeTests
             dq.Push("abc");
 
             dq.Pop();
-            Assert.IsTrue(dq.Mutex_available());
+            Assert.IsTrue(dq.MutexAvailable());
             dq.Pop();
-            Assert.IsTrue(dq.Mutex_available());
+            Assert.IsTrue(dq.MutexAvailable());
         }
 
         [TestMethod]
@@ -50,10 +50,10 @@ namespace DequeTests
             Deque dq = new Deque();
             dq.Push("abc");
 
-            dq.Pop_back();
-            Assert.IsTrue(dq.Mutex_available());
-            dq.Pop_back();
-            Assert.IsTrue(dq.Mutex_available());
+            dq.PopBack();
+            Assert.IsTrue(dq.MutexAvailable());
+            dq.PopBack();
+            Assert.IsTrue(dq.MutexAvailable());
         }
 
         // test concurrent access
@@ -66,7 +66,7 @@ namespace DequeTests
                 ConcurrentDeque.Push(i);
 
             for (int i = 0; i < 10; i++)
-                ConcurrentDeque.Pop();
+                Assert.IsNotNull(ConcurrentDeque.Pop());
         }
 
         [TestMethod]
@@ -79,6 +79,9 @@ namespace DequeTests
             t2.Start();
             t1.Join();
             t2.Join();
+
+            Assert.AreEqual(ConcurrentDeque.head, ConcurrentDeque.tail);
+            Assert.IsNull(ConcurrentDeque.head);
         }
     }
 
@@ -92,7 +95,7 @@ namespace DequeTests
             Deque dq = new Deque();
 
             //act
-            dq.Push_front("abcd");
+            dq.PushFront("abcd");
 
             //assert
             Assert.AreSame(dq.head, dq.tail);
@@ -138,7 +141,7 @@ namespace DequeTests
             dq.Push("abcd");
 
             //act
-            dq.Pop_back();
+            dq.PopBack();
 
             //assert
             Assert.AreSame(dq.head, dq.tail);
@@ -162,7 +165,7 @@ namespace DequeTests
             Deque dq = new Deque();
 
             //act & assert
-            Assert.AreEqual(null, dq.Pop_back());
+            Assert.AreEqual(null, dq.PopBack());
         }
     }
 
@@ -190,7 +193,7 @@ namespace DequeTests
             // stack-like (LIFO) ordering is achieved using push_front and pop
             Deque dq = new Deque();
             for (int i = 0; i < 10; i++)
-                dq.Push_front(i);
+                dq.PushFront(i);
 
             for (int i = 9; i >= 0; i--)
             {
@@ -205,11 +208,11 @@ namespace DequeTests
             // queue-like ordering (FIFO) can also be achieved using push_front and pop_back
             Deque dq = new Deque();
             for (int i = 0; i < 10; i++)
-                dq.Push_front(i);
+                dq.PushFront(i);
 
             for (int i = 0; i < 10; i++)
             {
-                int j = (int)dq.Pop_back();
+                int j = (int)dq.PopBack();
                 Assert.AreEqual(i, j);
             }
         }
@@ -224,7 +227,7 @@ namespace DequeTests
 
             for (int i = 9; i >= 0; i--)
             {
-                int j = (int)dq.Pop_back();
+                int j = (int)dq.PopBack();
                 Assert.AreEqual(i, j);
             }
         }

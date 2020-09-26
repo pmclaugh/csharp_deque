@@ -35,7 +35,7 @@ namespace DequeRefactor
             tail = null;
         }
 
-        private void Init_from_empty(object o)
+        private void InitFromEmpty(object o)
         {
             head = new DLLNode(o);
             tail = head;
@@ -45,7 +45,7 @@ namespace DequeRefactor
         {
             mut.WaitOne();
             if (tail == null)
-                Init_from_empty(o);
+                InitFromEmpty(o);
             else
             {
                 DLLNode new_tail = new DLLNode(o);
@@ -56,11 +56,11 @@ namespace DequeRefactor
             mut.ReleaseMutex();
         }
 
-        public void Push_front(object o)
+        public void PushFront(object o)
         {
             mut.WaitOne();
             if (head == null)
-                Init_from_empty(o);
+                InitFromEmpty(o);
             else
             {
                 DLLNode new_head = new DLLNode(o);
@@ -92,7 +92,7 @@ namespace DequeRefactor
             }
         }
 
-        public object? Pop_back()
+        public object? PopBack()
         {
             mut.WaitOne();
             if (tail == null)
@@ -113,7 +113,7 @@ namespace DequeRefactor
             }
         }
 
-        public bool Mutex_available()
+        public bool MutexAvailable()
         {
             // for testing
             bool acq = mut.WaitOne(1);
