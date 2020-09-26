@@ -35,12 +35,10 @@ namespace DequeRefactor
             tail = null;
         }
 
-        public void Init_from_empty(object o)
+        private void Init_from_empty(object o)
         {
-            mut.WaitOne();
             head = new DLLNode(o);
             tail = head;
-            mut.ReleaseMutex();
         }
 
         public void Push(object o)
