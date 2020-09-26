@@ -58,7 +58,7 @@ namespace DequeTests
 
         // test concurrent access
 
-        private static Deque ConcurrentDeque = new Deque();
+        private Deque ConcurrentDeque = new Deque();
 
         private void ThreadRoutine()
         {
